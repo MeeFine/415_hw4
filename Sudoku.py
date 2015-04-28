@@ -130,7 +130,7 @@ def which_box(row, col):
 def box_array(s, row, col):
     box = which_box(row, col)
     array = []
-    start_row = box // 3
+    start_row = box // 3 * 3
     start_col = box % 3 * 3
     for i in range(start_row, start_row + 3):
         array.append(s[i][start_col])
