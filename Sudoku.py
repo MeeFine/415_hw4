@@ -49,7 +49,7 @@ def goal_test(s):
         if 0 in s[i]:
             return False
 
-    for h in range(9):
+'''    for h in range(9):
         sum = 0
         for j in range(9):
             sum += s[h][j]
@@ -68,7 +68,7 @@ def goal_test(s):
             for index in range(9):
                 sum += box[index]
             if (sum != 45):
-                return False
+                return False'''
     return True
 
 def DESCRIBE_STATE(state):
@@ -140,10 +140,6 @@ def box_array(s, box):
         array.append(s[i][start_col+1])
         array.append(s[i][start_col+2])
     return array
-
-def goal_test(s):
-    '''If the first two pegs are empty, then s is a goal state.'''
-    return s == [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 
 def goal_message(s):
