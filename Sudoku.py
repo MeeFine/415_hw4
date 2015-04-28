@@ -12,11 +12,11 @@ PROBLEM_DESC= \
 # </METADATA>
 
 # <COMMON_CODE>
-```def DEEP_EQUALS(s1, s2):
+'''def DEEP_EQUALS(s1, s2):
     result = True
     for i in range(9):
         result = result and s1[i] == s2[i]
-    return result  ```
+    return result'''
 
 def DEEP_EQUALS(s1,s2):
   for i in range(9):
@@ -42,7 +42,7 @@ def copy_state(s):
       copy.append(s[i])
   return copy
 
-def goal_test(s):
+'''def goal_test(s):
     # Test whether there is 0 at the goal state, if there is, return false; otherwise return true;
     for i in range(9):
         sum = 0
@@ -52,7 +52,7 @@ def goal_test(s):
             sum += s[i][j]
         if sum != 45:
             return False
-            return DEEP_EQUALS(s, (([1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9]))
+        return DEEP_EQUALS(s, (([1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9]))'''
 
 
 def DESCRIBE_STATE(state):
@@ -181,7 +181,16 @@ def h_manhattan(s):
     return result
 
 # </COMMON_CODE>
-GOAL_STATE = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+'''# <STATE_VIS>
+def render_state(s):
+  txt = "\n"
+  for i in range(3):
+      for j in range(3):
+        txt += str(TILE_NAMES[s[i*3 + j]])+' '
+      txt += "\n"
+  return txt
+# </STATE_VIS>'''
 
 # <GOAL_TEST> (optional)
 GOAL_TEST = lambda s: goal_test(s)
