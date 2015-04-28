@@ -20,6 +20,12 @@ CREATE_INITIAL_STATE = lambda :[[5, 3, 1, 2, 7, 4, 0, 0, 0], [6, 2, 4, 1, 9, 5, 
 #[[3, 7, 8, 1, 4, 5, 6, 2, 9], [1, 4, 9, 8, 6, 2, 7, 5, 3], [5, 2, 6, 3, 9, 7, 1, 4, 8], [8, 3, 5, 9, 2, 1, 4, 7, 6], [2, 6, 1, 4, 7, 3, 8, 9, 5], [7, 9, 4, 6, 5, 8, 3, 1, 2], [9, 8, 3, 5, 1, 4, 0, 6, 7], [6, 1, 7, 2, 8, 9, 0, 0, 4], [4, 5, 2, 7, 3, 6, 9, 0, 1]]
 
 
+def DESCRIBE_STATE(state):
+  txt = "\n"
+  txt += str(state[0]) + " " + str(state[1]) + " " + str(state[2]) + "\n"
+  txt += str(state[3]) + " " + str(state[4]) + " " + str(state[5]) + "\n"
+  txt += str(state[6]) + " " + str(state[7]) + " " + str(state[8]) + "\n"
+  return txt
 # <COMMON_CODE>
 
 def DEEP_EQUALS(s1,s2):
