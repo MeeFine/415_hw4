@@ -1,4 +1,4 @@
-
+from math import sqrt
 # <METADATA>
 QUIET_VERSION = "0.1"
 PROBLEM_NAME = "Sudoku"
@@ -43,33 +43,33 @@ def copy_state(s):
     return news
 
 
-def can_place(s, numbers, location):
+def can_place(s, number, location):
     '''Tests whether it's legal to move a disk in state s
        from the From peg to the To peg.'''
     try:
         row = location[0]
         col = location[1]
         if s[row][col] != 0: return False
-        if numbers in s[row]: return False
+        if number in s[row]: return False
         row_array = []
         for i in range(9):
             row_array[i] = s[i][col]
-        if numbers in row_array: return False
-
-        if index % 3 == 2 and steps == 1: return False
+        if number in row_array: return False
+        box = box_array(s, row, col)
+        if number in box: return False
         return True
     except (Exception) as e:
         print(e)
 
 
-def move(s, steps):
+def move(s, number, location):
     '''Assuming it's legal to make the move, this computes
        the new state resulting from moving the topmost disk
        from the From peg to the To peg.'''
     news = copy_state(s)  # start with a deep copy.
-    index = s.index(0)
-    news[index] = s[index + steps]
-    news[index + steps] = 0
+    row = location[0]
+    col = location[1]
+    news[row][col] = number
     return news  # return new state
 
 def which_box(row, col):
@@ -77,7 +77,14 @@ def which_box(row, col):
 
 def box_array(s, row, col):
     box = which_box(row, col)
-
+    array = []
+    start_row = box // 3
+    start_col = box % 3 * 3
+    for i in range(start_row, start_row + 3):
+        array.append(s[i][start_col])
+        array.append(s[i][start_col+1])
+        array.append(s[i][start_col+2])
+    return array
 
 def goal_test(s):
     '''If the first two pegs are empty, then s is a goal state.'''
