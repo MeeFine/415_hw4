@@ -11,6 +11,9 @@ PROBLEM_DESC= \
     '''
 # </METADATA>
 
+# creates an initial state
+CREATE_INITIAL_STATE = lambda : [[5, 3, 0, 0, 7, 0, 0, 0, 0], [6, 0, 0, 1, 9, 5, 0, 0, 0], [0, 9, 8, 0, 0, 0, 0, 6, 0], [8, 0, 0, 0, 6, 0, 0, 0, 3], [4, 0, 0, 8, 0, 3, 0, 0, 1], [7, 0, 0, 0, 2, 0, 0, 0, 6], [0, 6, 0, 0, 0, 0, 2, 8, 0], [0, 0, 0, 4, 1, 9, 0, 0, 5], [0, 0, 0, 0, 8, 0, 0, 7, 9]]
+
 # <COMMON_CODE>
 '''def DEEP_EQUALS(s1, s2):
     result = True
@@ -39,10 +42,12 @@ def HASHCODE(s):
 def copy_state(s):
   copy = []
   for i in range(9):
-      copy.append(s[i])
+      innerCopy = []
+      for j in range(9):
+          innerCopy.append(s[i][j])
+      copy.append(innerCopy)
   return copy
-
-
+  
 def goal_test(s):
     # Test whether there is 0 at the goal state, if there is, return false; otherwise return true;
     for i in range(9):
