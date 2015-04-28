@@ -82,10 +82,10 @@ def DESCRIBE_STATE(state):
     return txt
 
 
-def HASHCODE(s):
+'''def HASHCODE(s):
     '''The result should be an immutable object such as a string
     that is unique for the state s.'''
-    return str(s)
+    return str(s)'''
 
 
 def copy_state(s):
