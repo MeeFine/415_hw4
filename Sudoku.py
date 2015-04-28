@@ -12,11 +12,47 @@ PROBLEM_DESC= \
 # </METADATA>
 
 # <COMMON_CODE>
-def DEEP_EQUALS(s1, s2):
+```def DEEP_EQUALS(s1, s2):
     result = True
     for i in range(9):
         result = result and s1[i] == s2[i]
-    return result
+    return result  ```
+
+def DEEP_EQUALS(s1,s2):
+  for i in range(9):
+      for j in range(9):
+          if s2[i][j] != s1[i][j]:
+              return False
+  return True
+
+def HASHCODE(s):
+  return str([str(s[0][0])+';'+str(s[0][1])+';'+str(s[0][2])+';'+str(s[0][3])+';'+str(s[0][4])+';'+str(s[0][5])+';'+str(s[0][6])+';'+str(s[0][7])+';'+str(s[0][8]) +';'+str(s[0][9]),
+              str(s[1][0])+';'+str(s[1][1])+';'+str(s[1][2])+';'+str(s[1][3])+';'+str(s[1][4])+';'+str(s[1][5])+';'+str(s[1][6])+';'+str(s[1][7])+';'+str(s[1][8]) +';'+str(s[1][9]),
+              str(s[2][0])+';'+str(s[2][1])+';'+str(s[2][2])+';'+str(s[2][3])+';'+str(s[2][4])+';'+str(s[2][5])+';'+str(s[2][6])+';'+str(s[2][7])+';'+str(s[2][8]) +';'+str(s[2][9]),
+              str(s[3][0])+';'+str(s[3][1])+';'+str(s[3][2])+';'+str(s[3][3])+';'+str(s[3][4])+';'+str(s[3][5])+';'+str(s[3][6])+';'+str(s[3][7])+';'+str(s[3][8]) +';'+str(s[3][9]),
+              str(s[4][0])+';'+str(s[4][1])+';'+str(s[4][2])+';'+str(s[4][3])+';'+str(s[4][4])+';'+str(s[4][5])+';'+str(s[4][6])+';'+str(s[4][7])+';'+str(s[4][8]) +';'+str(s[4][9]),
+              str(s[5][0])+';'+str(s[5][1])+';'+str(s[5][2])+';'+str(s[5][3])+';'+str(s[5][4])+';'+str(s[5][5])+';'+str(s[5][6])+';'+str(s[5][7])+';'+str(s[5][8]) +';'+str(s[5][9]),
+              str(s[6][0])+';'+str(s[6][1])+';'+str(s[6][2])+';'+str(s[6][3])+';'+str(s[6][4])+';'+str(s[6][5])+';'+str(s[6][6])+';'+str(s[6][7])+';'+str(s[6][8]) +';'+str(s[6][9]),
+              str(s[7][0])+';'+str(s[7][1])+';'+str(s[7][2])+';'+str(s[7][3])+';'+str(s[7][4])+';'+str(s[7][5])+';'+str(s[7][6])+';'+str(s[7][7])+';'+str(s[7][8]) +';'+str(s[7][9]),
+              str(s[8][0])+';'+str(s[8][1])+';'+str(s[8][2])+';'+str(s[8][3])+';'+str(s[8][4])+';'+str(s[8][5])+';'+str(s[8][6])+';'+str(s[8][7])+';'+str(s[8][8]) +';'+str(s[8][9])])
+
+def copy_state(s):
+  copy = []
+  for i in range(9):
+      copy.append(s[i])
+  return copy
+
+def goal_test(s):
+    # Test whether there is 0 at the goal state, if there is, return false; otherwise return true;
+    for i in range(9):
+        sum = 0
+        if 0 in s[i]:
+            return False
+        for j in range(9):
+            sum += s[i][j]
+        if sum != 45:
+            return False
+            return DEEP_EQUALS(s, (([1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9]))
 
 
 def DESCRIBE_STATE(state):
