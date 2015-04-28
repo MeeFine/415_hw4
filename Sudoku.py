@@ -42,7 +42,8 @@ def copy_state(s):
       copy.append(s[i])
   return copy
 
-'''def goal_test(s):
+
+def goal_test(s):
     # Test whether there is 0 at the goal state, if there is, return false; otherwise return true;
     for i in range(9):
         sum = 0
@@ -52,8 +53,20 @@ def copy_state(s):
             sum += s[i][j]
         if sum != 45:
             return False
-        return DEEP_EQUALS(s, (([1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9],[1, 2, 3, 4, 5, 6, 7, 8, 9]))'''
-
+    for x in range(9):
+        total = 0
+        for y in range(9):
+            total += s[y][x]
+        if total != 45:
+            return False
+    for p in range(0, 8, 3):
+        for q in range(0, 8, 3):
+            box = box_array(s, p, q)
+            for index in range(9):
+                sum += box[index]
+            if (sum != 45):
+                return False
+    return True
 
 def DESCRIBE_STATE(state):
     # Produces a textual description of a state.
