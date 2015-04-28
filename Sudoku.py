@@ -91,7 +91,10 @@ def HASHCODE(s):
 def copy_state(s):
     news = []
     for i in s:
-        news.append(i)
+        newl = []
+        for j in i:
+            newl.append(j)
+        news.append(newl)
     return news
 
 
@@ -107,7 +110,8 @@ def can_place(s, number, location):
         for i in range(9):
             row_array[i] = s[i][col]
         if number in row_array: return False
-        box = box_array(s, row, col)
+        box_number = which_box(row, col)
+        box = box_array(s, box_number)
         if number in box: return False
         return True
     except (Exception) as e:
@@ -127,8 +131,7 @@ def move(s, number, location):
 def which_box(row, col):
     return 3 * (row // 3) + (col // 3)
 
-def box_array(s, row, col):
-    box = which_box(row, col)
+def box_array(s, box):
     array = []
     start_row = box // 3 * 3
     start_col = box % 3 * 3
