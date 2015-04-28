@@ -46,13 +46,16 @@ def copy_state(s):
 def goal_test(s):
     # Test whether there is 0 at the goal state, if there is, return false; otherwise return true;
     for i in range(9):
-        sum = 0
         if 0 in s[i]:
             return False
+
+    for h in range(9):
+        sum = 0
         for j in range(9):
-            sum += s[i][j]
+            sum += s[h][j]
         if sum != 45:
             return False
+        
     for x in range(9):
         total = 0
         for y in range(9):
