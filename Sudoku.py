@@ -33,22 +33,13 @@ def DEEP_EQUALS(s1,s2):
         for j in range(9):
             if s2[i][j] != s1[i][j]:
                 return False
-  return True
+    return True
 
 def HASHCODE(s):
     txt = ''
     for i in range(9):
         txt += str(s[i])
     return txt
-
-def copy_state(s):
-  copy = []
-  for i in range(9):
-      innerCopy = []
-      for j in range(9):
-          innerCopy.append(s[i][j])
-      copy.append(innerCopy)
-  return copy
   
 def goal_test(s):
     # Test whether there is 0 at the goal state, if there is, return false; otherwise return true;
