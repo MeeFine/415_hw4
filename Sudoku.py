@@ -43,13 +43,19 @@ def copy_state(s):
     return news
 
 
-def can_move(s, steps):
+def can_place(s, numbers, location):
     '''Tests whether it's legal to move a disk in state s
        from the From peg to the To peg.'''
     try:
-        index = s.index(0)
-        if index + steps < 0 or index + steps > 8: return False
-        if index % 3 == 0 and steps == -1: return False
+        row = location[0]
+        col = location[1]
+        if s[row][col] != 0: return False
+        if numbers in s[row]: return False
+        row_array = []
+        for i in range(9):
+            row_array[i] = s[i][col]
+        if numbers in row_array: return False
+
         if index % 3 == 2 and steps == 1: return False
         return True
     except (Exception) as e:
@@ -66,12 +72,17 @@ def move(s, steps):
     news[index + steps] = 0
     return news  # return new state
 
+def which_box(row, col):
+    return 3 * (row // 3) + (col // 3)
+
+def box_array(s, row, col):
+    box = which_box(row, col)
+
 
 def goal_test(s):
     '''If the first two pegs are empty, then s is a goal state.'''
     return s == [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-#def which_box()
 
 def goal_message(s):
     return "The 8 Puzzle is solved!"
@@ -143,11 +154,11 @@ GOAL_MESSAGE_FUNCTION = lambda s: goal_message(s)
 numbers = range(1, 9)
 locations = [(row, col) for row in range(9) for col in range(9)]
 OPERATORS = [Operator("Place " + str(i) + " at " + str(l),
-                      lambda s, i=i: can_move(s, i),
+                      lambda s, i=i, l=l: can_place(s, i, l),
                       # The default value construct is needed
                       # here to capture the values of p&q separately
                       # in each iteration of the list comp. iteration.
-                      lambda s, i=i: move(s, i))
+                      lambda s, i=i, l=l: move(s, i, l))
              for i in numbers for l in locations]
 # </OPERATORS>
 
