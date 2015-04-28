@@ -156,7 +156,7 @@ class Operator:
         return self.state_transf(s)
 
 
-def h_euclidean(s):
+'''def h_euclidean(s):
     result = 0
     goal = GOAL_STATE
     for i in s:
@@ -191,7 +191,7 @@ def h_manhattan(s):
         g_row = g_index / 3
         g_col = g_index % 3
         result += abs(row - g_row) + abs(col - g_col)
-    return result
+    return result'''
 
 # </COMMON_CODE>
 
