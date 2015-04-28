@@ -198,15 +198,16 @@ def h_manhattan(s):
 
 # </COMMON_CODE>
 
-'''# <STATE_VIS>
+# <STATE_VIS>
 def render_state(s):
-  txt = "\n"
-  for i in range(3):
-      for j in range(3):
-        txt += str(TILE_NAMES[s[i*3 + j]])+' '
-      txt += "\n"
-  return txt
-# </STATE_VIS>'''
+    txt = "\n"
+    for i in s:
+        txt += "| "
+        for j in range(3):
+            txt += str(i[3*j]) + " | " + str(i[3*j+1]) + " | " + str(i[3*j+2]) + " | "
+        txt += "\n"
+    return txt
+# </STATE_VIS>
 
 # <GOAL_TEST> (optional)
 GOAL_TEST = lambda s: goal_test(s)
