@@ -21,11 +21,11 @@ CREATE_INITIAL_STATE = lambda :[[5, 3, 1, 2, 7, 4, 0, 0, 0], [6, 2, 4, 1, 9, 5, 
 
 
 def DESCRIBE_STATE(state):
-  txt = "\n"
-  txt += str(state[0]) + " " + str(state[1]) + " " + str(state[2]) + "\n"
-  txt += str(state[3]) + " " + str(state[4]) + " " + str(state[5]) + "\n"
-  txt += str(state[6]) + " " + str(state[7]) + " " + str(state[8]) + "\n"
-  return txt
+    txt = "\n"
+    txt += str(state[0]) + " " + str(state[1]) + " " + str(state[2]) + "\n"
+    txt += str(state[3]) + " " + str(state[4]) + " " + str(state[5]) + "\n"
+    txt += str(state[6]) + " " + str(state[7]) + " " + str(state[8]) + "\n"
+    return txt
 # <COMMON_CODE>
 
 def DEEP_EQUALS(s1,s2):
@@ -77,16 +77,6 @@ def goal_test(s):
             if (sum != 45):
                 return False'''
     return True
-
-def DESCRIBE_STATE(state):
-    # Produces a textual description of a state.
-    # Might not be needed in normal operation with GUIs.
-    txt = "\n"
-    for i in range(9):
-        txt += str(state[i]) + " "
-        if i % 3 == 2:
-            txt += "\n"
-    return txt
 
 
 def copy_state(s):
