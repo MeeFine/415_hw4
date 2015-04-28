@@ -92,7 +92,7 @@ def goal_test(s):
 
 
 def goal_message(s):
-    return "The 8 Puzzle is solved!"
+    return "Hooray! The Sudoku is solved!"
 
 class Operator:
     def __init__(self, name, precond, state_transf):
@@ -145,7 +145,6 @@ def h_manhattan(s):
     return result
 
 # </COMMON_CODE>
-
 GOAL_STATE = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 # <GOAL_TEST> (optional)
