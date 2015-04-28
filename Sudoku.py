@@ -21,17 +21,12 @@ CREATE_INITIAL_STATE = lambda :[[5, 3, 1, 2, 7, 4, 0, 0, 0], [6, 2, 4, 1, 9, 5, 
 
 
 # <COMMON_CODE>
-'''def DEEP_EQUALS(s1, s2):
-    result = True
-    for i in range(9):
-        result = result and s1[i] == s2[i]
-    return result'''
 
 def DEEP_EQUALS(s1,s2):
-  for i in range(9):
-      for j in range(9):
-          if s2[i][j] != s1[i][j]:
-              return False
+    for i in range(9):
+        for j in range(9):
+            if s2[i][j] != s1[i][j]:
+                return False
   return True
 
 def HASHCODE(s):
@@ -86,12 +81,6 @@ def DESCRIBE_STATE(state):
         if i % 3 == 2:
             txt += "\n"
     return txt
-
-
-'''def HASHCODE(s):
-    '''The result should be an immutable object such as a string
-    that is unique for the state s.'''
-    return str(s)'''
 
 
 def copy_state(s):
