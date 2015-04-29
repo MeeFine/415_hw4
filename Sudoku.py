@@ -12,7 +12,7 @@ PROBLEM_DESC= \
 # </METADATA>
 
 # creates an initial state
-CREATE_INITIAL_STATE = lambda :[[9, 2, 5, 6, 3, 1, 8, 4, 7], [8, 6, 3, 4, 2, 7, 5, 1, 9], [7, 1, 4, 8, 9, 5, 0, 6, 2], [4, 7, 1, 5, 0, 3, 2, 9, 0], [5, 3, 6, 2, 1, 9, 7, 0, 4], [2, 8, 9, 7, 6, 0, 1, 0, 3], [1, 5, 2, 3, 4, 0, 9, 7, 0], [3, 4, 7, 0, 5, 0, 6, 2, 0], [6, 9, 8, 1, 0, 2, 4, 3, 0]]
+CREATE_INITIAL_STATE = lambda :[[9, 2, 5, 6, 3, 1, 8, 4, 0], [8, 6, 3, 4, 0, 7, 5, 0, 9], [7, 1, 0, 8, 9, 5, 0, 6, 2], [4, 7, 1, 5, 0, 3, 2, 9, 0], [5, 3, 6, 0, 0, 9, 7, 0, 4], [2, 8, 0, 7, 6, 0, 1, 0, 3], [1, 5, 0, 3, 4, 0, 9, 7, 0], [3, 4, 7, 0, 5, 0, 6, 2, 0], [6, 9, 8, 1, 0, 2, 4, 3, 0]]
 
 
 #[[5, 3, 0, 0, 7, 4, 0, 0, 0], [6, 2, 4, 1, 9, 5, 3, 0, 0], [0, 9, 8, 3, 0, 0, 1, 6, 2], [8, 1, 2, 5, 6, 0, 4, 0, 3], [4, 5, 6, 8, 0, 3, 0, 2, 1], [7, 0, 3, 0, 2, 1, 5, 0, 6], [1, 6, 0, 0, 3, 0, 2, 8, 4], [2, 0, 0, 4, 1, 9, 6, 3, 5], [3, 4, 5, 6, 8, 2, 0, 7, 9]]
@@ -142,28 +142,25 @@ class Operator:
         return self.state_transf(s)
 
 
-def h_euclidean(s):
-    result = 0
-    goal = GOAL_STATE
+def h_constraint(s):
+    row_count = 0
+    col_count = 0
+    box_count = 0
     for i in s:
-        index = s.index(i)
-        g_index = goal.index(i)
-        row = index / 3
-        col = index % 3
-        g_row = g_index / 3
-        g_col = g_index % 3
-        result += sqrt(pow(g_row - row, 2) + pow(g_col - col, 2))
-    return result
-
-
-def h_hamming(s):
-    result = 0
-    goal = GOAL_STATE
-    for i in s:
-        index = s.index(i)
-        if goal[index] != i:
-            result += 1
-    return result
+        for n in i:
+            if n == 0:
+                row_count += 1
+    for i in range(9):
+        box = box_array(s, i)
+        for n in box:
+            if n == 0:
+                box_count += 1
+    for i in range(9):
+        for j in range(9):
+            if s[j][i] == 0:
+                col_count += 1
+    return pow(row_count, 2) + pow(col_count, 2)
+           #pow(box_count, 2) + pow(col_count, 2)
 
 
 def h_mrv(s):
@@ -180,7 +177,7 @@ def h_mrv(s):
         if maxCount < valueCount:
             maxCount = valueCount
 
-    '''for i in range(9):
+    for i in range(9):
         box = box_array(s, i)
         numberCount = 0
         for value in box:
@@ -191,7 +188,7 @@ def h_mrv(s):
             numberCount = 0
             nine += 1
         if maxCount < numberCount:
-            maxCount = numberCount'''
+            maxCount = numberCount
 
 
     for p in range(9):
@@ -205,7 +202,7 @@ def h_mrv(s):
         if maxCount < totalCount:
             maxCount = totalCount
 
-    return (9 - maxCount - nine) * 1
+    return (9 - maxCount - nine) * 10
 
 # </COMMON_CODE>
 
@@ -231,4 +228,4 @@ OPERATORS = [Operator("Place " + str(i) + " at " + str(l),
              for i in numbers for l in locations]
 # </OPERATORS>
 
-HEURISTICS = {'h_euclidean': h_euclidean, 'h_hamming':h_hamming, 'h_mrv':h_mrv}
+HEURISTICS = {'h_constraint': h_constraint, 'h_mrv':h_mrv}
