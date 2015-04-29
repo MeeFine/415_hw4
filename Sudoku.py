@@ -27,27 +27,27 @@ CREATE_INITIAL_STATE = lambda :[[9, 2, 5, 6, 3, 1, 8, 4, 0], [8, 6, 3, 4, 0, 7, 
 def DESCRIBE_STATE(s):
     txt = "\n"
     for i in range(9):
-    	if i % 3 == 0:
-    		txt += box_line()
-    	txt += "| "
-    	for j in range(9):
-    		txt += str(s[i][j]) + " "
-    		if (j % 3 == 2):
-    			txt += "| "
-    	txt += "\n"
+        if i % 3 == 0:
+            txt += box_line()
+        txt += "| "
+        for j in range(9):
+            txt += str(s[i][j]) + " "
+            if j % 3 == 2:
+                txt += "| "
+        txt += "\n"
     txt += box_line()
     return txt
     
 
 def box_line():
-	txt = ""
-	for k in range(25):
-		if k % 8 == 0:
-			txt += "+"
-		else:
-			txt += "-"
-	txt += "\n"
-	return txt
+    txt = ""
+    for k in range(25):
+        if k % 8 == 0:
+            txt += "+"
+        else:
+            txt += "-"
+    txt += "\n"
+    return txt
 
 def DEEP_EQUALS(s1,s2):
     for i in range(9):
@@ -83,21 +83,21 @@ def copy_state(s):
 def can_place(s, number, location):
     '''Tests whether it's legal to move a disk in state s
        from the From peg to the To peg.'''
-    #try:
-    row = location[0]
-    col = location[1]
-    if s[row][col] != 0: return False
-    if number in s[row]: return False
-    row_array = []
-    for i in range(9):
-        row_array.append(s[i][col])
-    if number in row_array: return False
-    box_number = which_box(row, col)
-    box = box_array(s, box_number)
-    if number in box: return False
-    return True
-    #except (Exception) as e:
-    #    print(e)
+    try:
+        row = location[0]
+        col = location[1]
+        if s[row][col] != 0: return False
+        if number in s[row]: return False
+        row_array = []
+        for i in range(9):
+            row_array.append(s[i][col])
+        if number in row_array: return False
+        box_number = which_box(row, col)
+        box = box_array(s, box_number)
+        if number in box: return False
+        return True
+    except (Exception) as e:
+        print(e)
 
 
 def move(s, number, location):
@@ -129,6 +129,7 @@ def box_array(s, box):
 def goal_message(s):
     return "Hooray! The Sudoku is solved!"
 
+
 class Operator:
     def __init__(self, name, precond, state_transf):
         self.name = name
@@ -159,8 +160,7 @@ def h_constraint(s):
         for j in range(9):
             if s[j][i] == 0:
                 col_count += 1
-    return pow(row_count, 2) + pow(col_count, 2)
-           #pow(box_count, 2) + pow(col_count, 2)
+    return pow(row_count, 2) + pow(box_count, 2) + pow(col_count, 2)
 
 
 def h_mrv(s):
