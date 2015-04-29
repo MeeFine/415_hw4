@@ -54,10 +54,10 @@ def DEEP_EQUALS(s1,s2):
     return True
 
 def HASHCODE(s):
-    txt = ''
+    text = ''
     for i in s:
-        txt += str(i)
-    return txt
+        text += str(i)
+    return text
   
 def goal_test(s):
     # Test whether there is 0 at the goal state, if there is, return false; otherwise return true;
