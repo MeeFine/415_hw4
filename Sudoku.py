@@ -12,7 +12,7 @@ PROBLEM_DESC= \
 # </METADATA>
 
 # creates an initial state
-CREATE_INITIAL_STATE = lambda :[[5, 3, 1, 2, 7, 4, 0, 0, 0], [6, 2, 4, 1, 9, 5, 3, 0, 0], [0, 9, 8, 3, 0, 0, 1, 6, 2], [8, 1, 2, 5, 6, 0, 4, 0, 3], [4, 5, 6, 8, 0, 3, 0, 2, 1], [7, 0, 3, 0, 2, 1, 5, 0, 6], [1, 6, 0, 0, 3, 0, 2, 8, 4], [2, 0, 0, 4, 1, 9, 6, 3, 5], [3, 4, 5, 6, 8, 2, 0, 7, 9]]
+CREATE_INITIAL_STATE = lambda :[[5, 3, 0, 0, 7, 4, 0, 0, 0], [6, 2, 4, 1, 9, 5, 3, 0, 0], [0, 9, 8, 3, 0, 0, 1, 6, 2], [8, 1, 2, 5, 6, 0, 4, 0, 3], [4, 5, 6, 8, 0, 3, 0, 2, 1], [7, 0, 3, 0, 2, 1, 5, 0, 6], [1, 6, 0, 0, 3, 0, 2, 8, 4], [2, 0, 0, 4, 1, 9, 6, 3, 5], [3, 4, 5, 6, 8, 2, 0, 7, 9]]
 
 
 #[[5, 3, 1, 2, 7, 4, 0, 0, 0], [6, 2, 4, 1, 9, 5, 3, 0, 0], [0, 9, 8, 0, 0, 0, 0, 6, 0], [8, 0, 0, 0, 6, 0, 0, 0, 3], [4, 0, 0, 8, 0, 3, 0, 0, 1], [7, 0, 0, 0, 2, 0, 0, 0, 6], [0, 6, 0, 0, 0, 0, 2, 8, 0], [0, 0, 0, 4, 1, 9, 0, 0, 5], [0, 0, 0, 0, 8, 0, 0, 7, 9]]
@@ -26,11 +26,11 @@ def DESCRIBE_STATE(s):
     for i in range(9):
     	if i % 3 == 0:
     		txt += box_line()
-    	txt += "|"
+    	txt += "| "
     	for j in range(9):
     		txt += str(s[i][j]) + " "
     		if (j % 3 == 2):
-    			txt += "|"
+    			txt += "| "
     	txt += "\n"
     txt += box_line()
     return txt
@@ -38,8 +38,8 @@ def DESCRIBE_STATE(s):
 
 def box_line():
 	txt = ""
-	for k in range(22):
-		if k % 7 == 0:
+	for k in range(25):
+		if k % 8 == 0:
 			txt += "+"
 		else:
 			txt += "-"
@@ -107,8 +107,10 @@ def move(s, number, location):
     news[row][col] = number
     return news  # return new state
 
+
 def which_box(row, col):
     return 3 * (row // 3) + (col // 3)
+
 
 def box_array(s, box):
     array = []
