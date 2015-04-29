@@ -228,4 +228,4 @@ OPERATORS = [Operator("Place " + str(i) + " at " + str(l),
              for i in numbers for l in locations]
 # </OPERATORS>
 
-HEURISTICS = {'h_constraint': h_constraint, 'h_mrv':h_mrv}
+HEURISTICS = {'h_constraint': h_constraint, 'h_mrv': h_mrv}
