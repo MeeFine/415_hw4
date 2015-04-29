@@ -12,7 +12,7 @@ PROBLEM_DESC= \
 # </METADATA>
 
 # creates an initial state
-CREATE_INITIAL_STATE = lambda :[[9, 0, 5, 6, 3, 1, 8, 0, 7], [8, 0, 3, 0, 2, 7, 5, 1, 0], [7, 1, 0, 8, 0, 5, 0, 6, 2], [4, 0, 1, 5, 0, 3, 2, 9, 0], [5, 0, 6, 2, 0, 9, 7, 0, 4], [2, 0, 9, 0, 6, 0, 1, 0, 3], [1, 0, 2, 0, 4, 0, 9, 7, 0], [3, 4, 7, 0, 5, 0, 6, 2, 0], [6, 0, 8, 1, 0, 2, 4, 3, 0]]
+CREATE_INITIAL_STATE = lambda :[[9, 2, 5, 6, 3, 1, 8, 4, 7], [8, 6, 3, 4, 2, 7, 5, 1, 9], [7, 1, 4, 8, 9, 5, 0, 6, 2], [4, 7, 1, 5, 0, 3, 2, 9, 0], [5, 3, 6, 2, 1, 9, 7, 0, 4], [2, 8, 9, 7, 6, 0, 1, 0, 3], [1, 5, 2, 3, 4, 0, 9, 7, 0], [3, 4, 7, 0, 5, 0, 6, 2, 0], [6, 9, 8, 1, 0, 2, 4, 3, 0]]
 
 
 #[[5, 3, 0, 0, 7, 4, 0, 0, 0], [6, 2, 4, 1, 9, 5, 3, 0, 0], [0, 9, 8, 3, 0, 0, 1, 6, 2], [8, 1, 2, 5, 6, 0, 4, 0, 3], [4, 5, 6, 8, 0, 3, 0, 2, 1], [7, 0, 3, 0, 2, 1, 5, 0, 6], [1, 6, 0, 0, 3, 0, 2, 8, 4], [2, 0, 0, 4, 1, 9, 6, 3, 5], [3, 4, 5, 6, 8, 2, 0, 7, 9]]
@@ -168,24 +168,30 @@ def h_hamming(s):
 
 def h_mrv(s):
     maxCount = 0
-
+    nine = 0
     for x in s:
         valueCount = 0
         for val in x:
             if val != 0:
                 valueCount += 1
+        if valueCount == 9:
+            valueCount = 0
+            nine += 1
         if maxCount < valueCount:
             maxCount = valueCount
 
-    for i in range(9):
+    '''for i in range(9):
         box = box_array(s, i)
         numberCount = 0
         for value in box:
             if value != 0:
                 numberCount += 1
               #  lst.append(value)
+        if numberCount == 9:
+            numberCount = 0
+            nine += 1
         if maxCount < numberCount:
-            maxCount = numberCount
+            maxCount = numberCount'''
 
 
     for p in range(9):
@@ -193,10 +199,13 @@ def h_mrv(s):
         for q in range(9):
             if s[q][p] != 0:
                 totalCount += 1
+        if totalCount == 9:
+            totalCount = 0
+            nine += 1
         if maxCount < totalCount:
             maxCount = totalCount
 
-    return 10 / maxCount
+    return (9 - maxCount - nine) * 1
 
 # </COMMON_CODE>
 
