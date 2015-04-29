@@ -69,7 +69,7 @@ def IterativeAStar(initial_state):
                     BACKLINKS[Problem.HASHCODE(new_state)] = S
                     distance[Problem.HASHCODE(new_state)] = distance[Problem.HASHCODE(S)] + 1
                     # Uncomment for debugging:
-                    # print(Problem.DESCRIBE_STATE(new_state))
+                    print(Problem.DESCRIBE_STATE(new_state))
 
         for s2 in L:
             for i in range(len(OPEN)):
