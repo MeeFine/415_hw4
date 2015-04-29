@@ -189,7 +189,7 @@ GOAL_MESSAGE_FUNCTION = lambda s: goal_message(s)
 
 
 # <OPERATORS>
-numbers = range(1, 9)
+numbers = range(1, 10)
 locations = [(row, col) for row in range(9) for col in range(9)]
 OPERATORS = [Operator("Place " + str(i) + " at " + str(l),
                       lambda s, i=i, l=l: can_place(s, i, l),

@@ -66,7 +66,7 @@ def IterativeDFS(initial_state):
           L.append(new_state)
           BACKLINKS[Problem.HASHCODE(new_state)] = S
           #Uncomment for debugging:
-          #print(Problem.DESCRIBE_STATE(new_state))
+          print(Problem.DESCRIBE_STATE(new_state))
 
     for s2 in L:
       for i in range(len(OPEN)):
