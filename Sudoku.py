@@ -20,14 +20,32 @@ CREATE_INITIAL_STATE = lambda :[[5, 3, 1, 2, 7, 4, 0, 0, 0], [6, 2, 4, 1, 9, 5, 
 #[[3, 7, 8, 1, 4, 5, 6, 2, 9], [1, 4, 9, 8, 6, 2, 7, 5, 3], [5, 2, 6, 3, 9, 7, 1, 4, 8], [8, 3, 5, 9, 2, 1, 4, 7, 6], [2, 6, 1, 4, 7, 3, 8, 9, 5], [7, 9, 4, 6, 5, 8, 3, 1, 2], [9, 8, 3, 5, 1, 4, 0, 6, 7], [6, 1, 7, 2, 8, 9, 0, 0, 4], [4, 5, 2, 7, 3, 6, 9, 0, 1]]
 
 # <COMMON_CODE>
-def DESCRIBE_STATE(state):
+
+def DESCRIBE_STATE(s):
     txt = "\n"
-    txt += str(state[0]) + " " + str(state[1]) + " " + str(state[2]) + "\n"
-    txt += str(state[3]) + " " + str(state[4]) + " " + str(state[5]) + "\n"
-    txt += str(state[6]) + " " + str(state[7]) + " " + str(state[8]) + "\n"
+    for i in range(9):
+    	if i % 3 == 0:
+    		txt += box_line()
+    	txt += "|"
+    	for j in range(9):
+    		txt += str(s[i][j]) + " "
+    		if (j % 3 == 2):
+    			txt += "|"
+    	txt += "\n"
+    txt += box_line()
     return txt
     
-    
+
+def box_line():
+	txt = ""
+	for k in range(22):
+		if k % 7 == 0:
+			txt += "+"
+		else:
+			txt += "-"
+	txt += "\n"
+	return txt
+
 def DEEP_EQUALS(s1,s2):
     for i in range(9):
         for j in range(9):
@@ -37,36 +55,15 @@ def DEEP_EQUALS(s1,s2):
 
 def HASHCODE(s):
     txt = ''
-    for i in range(9):
-        txt += str(s[i])
+    for i in s:
+        txt += str(i)
     return txt
   
 def goal_test(s):
     # Test whether there is 0 at the goal state, if there is, return false; otherwise return true;
-    for i in range(9):
-        if 0 in s[i]:
+    for i in s:
+        if 0 in i:
             return False
-
-'''    for h in range(9):
-        sum = 0
-        for j in range(9):
-            sum += s[h][j]
-        if sum != 45:
-            return False
-        
-    for x in range(9):
-        total = 0
-        for y in range(9):
-            total += s[y][x]
-        if total != 45:
-            return False
-    for p in range(0, 8, 3):
-        for q in range(0, 8, 3):
-            box = box_array(s, p, q)
-            for index in range(9):
-                sum += box[index]
-            if (sum != 45):
-                return False'''
     return True
 
 
@@ -83,21 +80,21 @@ def copy_state(s):
 def can_place(s, number, location):
     '''Tests whether it's legal to move a disk in state s
        from the From peg to the To peg.'''
-    try:
-        row = location[0]
-        col = location[1]
-        if s[row][col] != 0: return False
-        if number in s[row]: return False
-        row_array = []
-        for i in range(9):
-            row_array[i] = s[i][col]
-        if number in row_array: return False
-        box_number = which_box(row, col)
-        box = box_array(s, box_number)
-        if number in box: return False
-        return True
-    except (Exception) as e:
-        print(e)
+    #try:
+    row = location[0]
+    col = location[1]
+    if s[row][col] != 0: return False
+    if number in s[row]: return False
+    row_array = []
+    for i in range(9):
+        row_array.append(s[i][col])
+    if number in row_array: return False
+    box_number = which_box(row, col)
+    box = box_array(s, box_number)
+    if number in box: return False
+    return True
+    #except (Exception) as e:
+    #    print(e)
 
 
 def move(s, number, location):
@@ -179,16 +176,6 @@ def h_manhattan(s):
 
 # </COMMON_CODE>
 
-# <STATE_VIS>
-def render_state(s):
-    txt = "\n"
-    for i in s:
-        txt += "| "
-        for j in range(3):
-            txt += str(i[3*j]) + " | " + str(i[3*j+1]) + " | " + str(i[3*j+2]) + " | "
-        txt += "\n"
-    return txt
-# </STATE_VIS>
 
 # <GOAL_TEST> (optional)
 GOAL_TEST = lambda s: goal_test(s)
@@ -211,4 +198,4 @@ OPERATORS = [Operator("Place " + str(i) + " at " + str(l),
              for i in numbers for l in locations]
 # </OPERATORS>
 
-HEURISTICS = {'h_euclidean': h_euclidean, 'h_hamming':h_hamming, 'h_manhattan':h_manhattan}
+# HEURISTICS = {'h_euclidean': h_euclidean, 'h_hamming':h_hamming, 'h_manhattan':h_manhattan}
