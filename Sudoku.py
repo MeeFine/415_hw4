@@ -160,21 +160,40 @@ def h_hamming(s):
         index = s.index(i)
         if goal[index] != i:
             result += 1
-    return result
+    return result'''
 
 
 def h_manhattan(s):
-    result = 0
-    goal = GOAL_STATE
-    for i in s:
-        index = s.index(i)
-        g_index = goal.index(i)
-        row = index / 3
-        col = index % 3
-        g_row = g_index / 3
-        g_col = g_index % 3
-        result += abs(row - g_row) + abs(col - g_col)
-    return result'''
+    maxCount = 0
+    for i in range(0, 8, 3):
+        for j in range(0, 8, 3):
+           # lst = []
+            box = box_array(s, i, j)
+            numberCount = 0
+            for value in box:
+                if value != 0:
+                    numberCount = numberCount + 1
+                  #  lst.append(value)
+            if maxCount < numberCount :
+                maxCount = numberCount
+    #
+    for x in s:
+        valueCount = 0
+        for val in x:
+            if val != 0:
+                valueCount = valueCount + 1
+        if maxCount < valueCount:
+            maxCount = valueCount
+
+    for p in range(0, 9):
+        totalCount = 0
+        for q in range(0, 9):
+            if s[q][p] != 0:
+                totalCount += 1
+        if maxCount < totalCount:
+            maxCount = totalCount
+
+    return 10 / maxCount
 
 # </COMMON_CODE>
 
